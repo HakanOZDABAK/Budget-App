@@ -18,7 +18,7 @@ const intl= useIntl()
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="my-5 card flex justify-content-center">
+      <div className="mt-5 card flex justify-content-center">
         <Card title={intl.formatMessage({
                         id: 'expenseBudgetCardName',
                       })}className="bg-red-200 md:w-25rem">

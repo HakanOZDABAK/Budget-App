@@ -15,7 +15,7 @@ export default function MainPage() {
   }
 
   return (
- <>
+<div>
       <div className="mt-5 grid card flex justify-content-center">
         <Card title={intl.formatMessage({
                         id: 'incomeCard',
@@ -25,16 +25,16 @@ export default function MainPage() {
                       })}</p>
         </Card>
       </div>
-      <div className="mt-5 grid  card flex justify-content-center">
+      <div className="mt-5 grid card flex justify-content-center">
         <Card title={intl.formatMessage({
                         id: 'expenseCard',
-                      })} className="bg-blue-200 md:w-25rem" onClick={()=>{handleChangePage('/expenseBudget')}}>
+                      })} className="bg-blue-200  md:w-25rem" onClick={()=>{handleChangePage('/expenseBudget')}}>
           <p className="m-0">{intl.formatMessage({
                         id: 'expenseCardText',
                       })}</p>
         </Card>
       </div>
-      <div className="mt-5 grid  card flex justify-content-center">
+      <div className="mt-5 grid card flex justify-content-center">
         <Card title={intl.formatMessage({
                         id: 'budgetCard',
                       })} className="bg-green-200 md:w-25rem" onClick={()=>{handleChangePage('/budgetsDetail')}}
@@ -44,7 +44,8 @@ export default function MainPage() {
                       })}</p>
                       
         </Card>
-      </div></>
+      </div>
+      </div>
 
 
   );

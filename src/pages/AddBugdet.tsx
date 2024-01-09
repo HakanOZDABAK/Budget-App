@@ -19,10 +19,10 @@ export default function AddBugdet() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="my-5 card flex justify-content-center">
+      <div className="mt-5 ml-3 card flex justify-content-center">
         <Card title={intl.formatMessage({
                         id: 'addBudgetCardName',
-                      })} className="bg-green-200 md:w-25rem">
+                      })} className="bg-green-200 md:w-20rem">
           <InputText
             type="text"
             placeholder={intl.formatMessage({
