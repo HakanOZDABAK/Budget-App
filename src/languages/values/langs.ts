@@ -23,5 +23,6 @@ export type LangType = {
  expenseBudgetMonthly:string;
  expenseBudgetYearly:string;
  add:string;
+ languages:string;
 
 }

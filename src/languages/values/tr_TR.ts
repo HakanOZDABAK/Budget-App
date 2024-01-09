@@ -23,6 +23,7 @@ const tr: LangType ={
     expenseBudgetWeekly: "Haftalık",
     expenseBudgetMonthly: "Aylık",
     expenseBudgetYearly: "Yıllık",
-    add: "Ekle"
+    add: "Ekle",
+    languages:"Diller",
 }
 export default tr;

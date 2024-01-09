@@ -10,7 +10,7 @@ type ILocaleStore={
 export const useLocaleStore = create<ILocaleStore>(set =>{
     return{
 
-        locale:'en_US',
+        locale:'tr_TR',
         setLocale:(locale:keyof AppLocaleType) => set(()=>({locale}))
     }
 })

@@ -23,6 +23,7 @@ const en:LangType={
     expenseBudgetWeekly: "weekly",
     expenseBudgetMonthly: "monthly",
     expenseBudgetYearly: "yearly",
-    add: "Add"
+    add: "Add",
+    languages:"Languages"
 }
 export default en;

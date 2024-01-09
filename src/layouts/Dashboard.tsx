@@ -5,7 +5,7 @@ import Budgets from '../pages/Budgets'
 
 export default function Dashboard() {
   return (
-<Budgets/>
+<MainPage/>
 
 
   )

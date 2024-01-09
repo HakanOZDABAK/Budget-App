@@ -6,14 +6,19 @@ import reportWebVitals from './reportWebVitals';
 import { PrimeReactProvider, PrimeReactContext } from 'primereact/api';
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import "/node_modules/primeflex/primeflex.css"
+import { IntlProvider } from 'react-intl';
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
+  
 );
 root.render(
+
   <PrimeReactProvider>
     <App />
   </PrimeReactProvider>
+
 );
 
 // If you want to start measuring performance in your app, pass a function

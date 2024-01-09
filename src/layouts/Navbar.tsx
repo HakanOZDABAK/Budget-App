@@ -1,93 +1,61 @@
+import React, { useEffect, useRef, useState } from "react";
+import { Menubar } from "primereact/menubar";
+import { InputText } from "primereact/inputtext";
+import { MenuItem } from "primereact/menuitem";
+import { Badge } from "primereact/badge";
+import { Avatar } from "primereact/avatar";
+import { PanelMenu } from "primereact/panelmenu";
+import { useLocaleStore } from "../store/useLocaleStore";
+import { AppLocaleType, LanguageOptions } from "../languages";
+import { Menu } from "primereact/menu";
+import { Button } from "primereact/button";
+import { useIntl } from "react-intl";
 
-import React from 'react';
-import { Menubar } from 'primereact/menubar';
-import { InputText } from 'primereact/inputtext';
-import { MenuItem } from 'primereact/menuitem';
-import { Badge } from 'primereact/badge';
-import { Avatar } from 'primereact/avatar';  
-const itemRenderer = (item:any) => (
-    <a className="flex align-items-center p-menuitem-link">
-        <span className={item.icon} />
-        <span className="mx-2">{item.label}</span>
-        {item.badge && <Badge className="ml-auto" value={item.badge} />}
-        {item.shortcut && <span className="ml-auto border-1 surface-border border-round surface-100 text-xs p-1">{item.shortcut}</span>}
-    </a>
-);
-const items: MenuItem[] = [
-    {
-        label: 'Home',
-        icon: 'pi pi-home'
-    },
-    {
-        label: 'Features',
-        icon: 'pi pi-star'
-    },
-    {
-        label: 'Projects',
-        icon: 'pi pi-search',
-        items: [
-            {
-                label: 'Core',
-                icon: 'pi pi-bolt',
-                shortcut: '⌘+S',
-                template: itemRenderer
-            },
-            {
-                label: 'Blocks',
-                icon: 'pi pi-server',
-                shortcut: '⌘+B',
-                template: itemRenderer
-            },
-            {
-                label: 'UI Kit',
-                icon: 'pi pi-pencil',
-                shortcut: '⌘+U',
-                template: itemRenderer
-            },
-            {
-                separator: true
-            },
-            {
-                label: 'Templates',
-                icon: 'pi pi-palette',
-                items: [
-                    {
-                        label: 'Apollo',
-                        icon: 'pi pi-palette',
-                        badge: 2,
-                        template: itemRenderer
-                    },
-                    {
-                        label: 'Ultima',
-                        icon: 'pi pi-palette',
-                        badge: 3,
-                        template: itemRenderer
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        label: 'Contact',
-        icon: 'pi pi-envelope',
-        badge: 3,
-        template: itemRenderer
-    }
-];
-
-const start = <img alt="logo" src="https://primefaces.org/cdn/primereact/images/logo.png" height="40" className="mr-2"></img>;
-const end = (
-    <div className="flex align-items-center gap-2">
-        <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
-    </div>
-);
 export default function Navbar() {
+    const menuLeft = useRef<Menu>(null)
+    const intl = useIntl()
    
-
-    return (
-        <div className="card">
-            <Menubar model={items} start={start} end={end} />
+      let {locale, setLocale} = useLocaleStore();
+      const [title, setTitle] = useState<String>();
+      
+      useEffect(() => {
+          setTitle(LanguageOptions.find(item => item.id === locale)?.label || '');
+        }, [locale]);
+      
+      const items: MenuItem[] = LanguageOptions.map((item) => ({
+          label: item.label,
+          icon: 'pi pi-flag', // İsteğe bağlı, bir bayrak ikonu ekleyebilirsiniz
+          command: () => setLocale(item.id as keyof AppLocaleType), // setLocale fonksiyonunu çağırarak dil değiştirme
+        }));
+      
+      const start = (
+        <img
+          alt="logo"
+          src="https://primefaces.org/cdn/primereact/images/logo.png"
+          height="40"
+          className="mr-2"
+        ></img>
+      );
+      const end = (
+        <div className="flex align-items-center gap-2">
+          <Menu model={items} popup ref={menuLeft} id="popup_menu_left" />
+            <Button
+              label={intl.formatMessage({id: 'languages'})}
+              icon="pi pi-align-left"
+              className="mr-2"
+              onClick={(event) => menuLeft.current?.toggle(event)}
+              aria-controls="popup_menu_left"
+              aria-haspopup
+            />
+          <Avatar
+            image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png"
+            shape="circle"
+          />
         </div>
-    )
+      );
+  return (
+    <div className="card">
+      <Menubar  start={start} end={end} />
+    </div>
+  );
 }
-        
