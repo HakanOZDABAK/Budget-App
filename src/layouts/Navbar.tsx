@@ -10,10 +10,15 @@ import { AppLocaleType, LanguageOptions } from "../languages";
 import { Menu } from "primereact/menu";
 import { Button } from "primereact/button";
 import { useIntl } from "react-intl";
-
+import { useNavigate } from "react-router-dom";
 export default function Navbar() {
     const menuLeft = useRef<Menu>(null)
     const intl = useIntl()
+    const navigate = useNavigate()
+
+    const handleGoPath = (path:any) =>{
+      navigate(path)
+    }
    
       let {locale, setLocale} = useLocaleStore();
       const [title, setTitle] = useState<String>();
@@ -34,6 +39,7 @@ export default function Navbar() {
           src="https://primefaces.org/cdn/primereact/images/logo.png"
           height="40"
           className="mr-2"
+          onClick={()=>{navigate("/home")}}
         ></img>
       );
       const end = (
@@ -48,6 +54,7 @@ export default function Navbar() {
               aria-haspopup
             />
           <Avatar
+          
             image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png"
             shape="circle"
           />

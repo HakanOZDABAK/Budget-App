@@ -6,18 +6,19 @@ import reportWebVitals from './reportWebVitals';
 import { PrimeReactProvider, PrimeReactContext } from 'primereact/api';
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import "/node_modules/primeflex/primeflex.css"
-import { IntlProvider } from 'react-intl';
 
+import { BrowserRouter } from "react-router-dom";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
   
 );
 root.render(
-
+  <BrowserRouter>
   <PrimeReactProvider>
     <App />
   </PrimeReactProvider>
+  </BrowserRouter>
 
 );
 
