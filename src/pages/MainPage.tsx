@@ -7,8 +7,8 @@ export default function MainPage() {
   const intl = useIntl();
 
   return (
-    <>
-      <div className="my-5 card flex justify-content-center">
+ <>
+      <div className="mt-5 grid card flex justify-content-center">
         <Card title={intl.formatMessage({
                         id: 'incomeCard',
                       })} className="bg-red-200 md:w-25rem" onClick={()=>{}}>
@@ -17,7 +17,7 @@ export default function MainPage() {
                       })}</p>
         </Card>
       </div>
-      <div className="my-5  card flex justify-content-center">
+      <div className="mt-5 grid  card flex justify-content-center">
         <Card title={intl.formatMessage({
                         id: 'expenseCard',
                       })} className="bg-blue-200 md:w-25rem" onClick={()=>{}}>
@@ -26,7 +26,7 @@ export default function MainPage() {
                       })}</p>
         </Card>
       </div>
-      <div className="my-5 card flex justify-content-center">
+      <div className="mt-5 grid  card flex justify-content-center">
         <Card title={intl.formatMessage({
                         id: 'budgetCard',
                       })} className="bg-green-200 md:w-25rem" onClick={()=>{}}>
@@ -34,7 +34,8 @@ export default function MainPage() {
                         id: 'budgetCardText',
                       })}</p>
         </Card>
-      </div>
-    </>
+      </div></>
+
+
   );
 }
