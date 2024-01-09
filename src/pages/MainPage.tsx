@@ -1,24 +1,38 @@
 import React from "react";
 import { Card } from "primereact/card";
 import { Button } from "primereact/button";
+import {useIntl} from 'react-intl';
 
 export default function MainPage() {
+  const intl = useIntl();
 
   return (
     <>
       <div className="my-5 card flex justify-content-center">
-        <Card title="Gelir Ekle" className="bg-red-200 md:w-25rem" onClick={()=>{}}>
-          <p className="m-0">Gelir Durumlarınızı Eklemek için Tıklayın!</p>
+        <Card title={intl.formatMessage({
+                        id: 'incomeCard',
+                      })} className="bg-red-200 md:w-25rem" onClick={()=>{}}>
+          <p className="m-0">{intl.formatMessage({
+                        id: 'incomeCardText',
+                      })}</p>
         </Card>
       </div>
       <div className="my-5  card flex justify-content-center">
-        <Card title="Gider Ekle" className="bg-blue-200 md:w-25rem" onClick={()=>{}}>
-          <p className="m-0">Gider Durumlarınızı Eklemek için Tıklayın</p>
+        <Card title={intl.formatMessage({
+                        id: 'expenseCard',
+                      })} className="bg-blue-200 md:w-25rem" onClick={()=>{}}>
+          <p className="m-0">{intl.formatMessage({
+                        id: 'expenseCardText',
+                      })}</p>
         </Card>
       </div>
       <div className="my-5 card flex justify-content-center">
-        <Card title="Bütçe Gidişatı" className="bg-green-200 md:w-25rem" onClick={()=>{}}>
-          <p className="m-0">Bütçe Durumunuzu Öğrenmek için Tıklayın</p>
+        <Card title={intl.formatMessage({
+                        id: 'budgetCard',
+                      })} className="bg-green-200 md:w-25rem" onClick={()=>{}}>
+          <p className="m-0">{intl.formatMessage({
+                        id: 'budgetCardText',
+                      })}</p>
         </Card>
       </div>
     </>

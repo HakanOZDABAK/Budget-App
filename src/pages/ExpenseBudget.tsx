@@ -3,8 +3,9 @@ import { Card } from "primereact/card";
 import { InputText } from "primereact/inputtext";
 import { RadioButton } from "primereact/radiobutton";
 import { Button } from "primereact/button";
-
-export default function DecreaseBudget() {
+import { useIntl } from "react-intl";
+export default function ExpenseBudget() {
+const intl= useIntl()
   const {
     register,
     handleSubmit,
@@ -18,68 +19,94 @@ export default function DecreaseBudget() {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="my-5 card flex justify-content-center">
-        <Card title="Gider Ekle" className="bg-red-200 md:w-25rem">
+        <Card title={intl.formatMessage({
+                        id: 'expenseBudgetCardName',
+                      })}className="bg-red-200 md:w-25rem">
           <InputText
             type="text"
-            placeholder="Gider İsmi"
+            placeholder={intl.formatMessage({
+              id: 'expenseBudgetInputName',
+            })}
             {...register("incomeName", {})}
           />
           <InputText
             className="mt-3"
             type="text"
-            placeholder="Gider Değeri"
+            placeholder={intl.formatMessage({
+              id: 'expenseBudgetInputValue',
+            })}
             {...register("incomeValue", { required: true, min: 0 })}
           />
           <div className="mt-3 flex flex-wrap gap-3">
           <label className="ml-2">
-                Bu Gideri Ne Kadar Sürede Ödüyorsunuz?
+          {intl.formatMessage({
+                        id: 'expenseBudgetRatio',
+                      })}
               </label>
             <div className="flex align-items-center">
               <input
-                value="Günlük"
+                value={intl.formatMessage({
+                  id: 'expenseBudgetDaily',
+                })}
                 type="radio"
                 {...register("incomeRoutine")}
                 id="gunluk"
               />
               <label htmlFor="ingredient1" className="ml-2">
-                Günlük
+              {intl.formatMessage({
+                        id: 'expenseBudgetDaily',
+                      })}
               </label>
             </div>
             <div className="flex align-items-center">
               <input
                 type="radio"
                 {...register("incomeRoutine")}
-                value="Haftalık"
+                value={intl.formatMessage({
+                  id: 'expenseBudgetWeekly',
+                })}
                 id="haftalik"
               />
               <label htmlFor="ingredient2" className="ml-2">
-                Haftalık
+              {intl.formatMessage({
+                        id: 'expenseBudgetWeekly',
+                      })}
               </label>
             </div>
             <div className="flex align-items-center">
               <input
                 type="radio"
                 {...register("incomeRoutine")}
-                value="Aylık"
+                value={intl.formatMessage({
+                  id: 'expenseBudgetMonthly',
+                })}
                 id="aylik"
               />
               <label htmlFor="ingredient3" className="ml-2">
-                Aylık
+              {intl.formatMessage({
+                        id: 'expenseBudgetMonthly',
+                      })}
               </label>
             </div>
             <div className="flex align-items-center">
               <input
                 {...register("incomeRoutine")}
-                value="Yıllık"
+                value={intl.formatMessage({
+                  id: 'expenseBudgetYearly',
+                })}
                 type="radio"
                 id="yillik"
               />
               <label htmlFor="ingredient4" className="ml-2">
-                Yıllık
+              {intl.formatMessage({
+                        id: 'expenseBudgetYearly',
+                      })}
               </label>
             </div>
           </div>
-          <Button label="Ekle" className="mt-3" type="submit" />
+          <Button label={intl.formatMessage({
+                        id: 'add',
+                      })} className="mt-3" type="submit" />
         </Card>
       </div>
     </form>

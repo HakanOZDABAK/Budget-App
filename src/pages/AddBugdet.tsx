@@ -4,8 +4,9 @@ import { Card } from "primereact/card";
 import { InputText } from "primereact/inputtext";
 import { RadioButton } from "primereact/radiobutton";
 import { Button } from "primereact/button";
-
+import { useIntl } from "react-intl";
 export default function AddBugdet() {
+  const intl=useIntl()
   const {
     register,
     handleSubmit,
@@ -19,68 +20,94 @@ export default function AddBugdet() {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="my-5 card flex justify-content-center">
-        <Card title="Gelir Ekle" className="bg-green-200 md:w-25rem">
+        <Card title={intl.formatMessage({
+                        id: 'addBudgetCardName',
+                      })} className="bg-green-200 md:w-25rem">
           <InputText
             type="text"
-            placeholder="Gelir İsmi"
+            placeholder={intl.formatMessage({
+              id: 'addBudgetInputNamePlace',
+            })}
             {...register("incomeName", {})}
           />
           <InputText
             className="mt-3"
             type="text"
-            placeholder="Gelir Değeri"
+            placeholder={intl.formatMessage({
+              id: 'addBudgetInputValue',
+            })}
             {...register("incomeValue", { required: true, min: 0 })}
           />
           <div className="mt-3 flex flex-wrap gap-3">
           <label className="ml-2">
-                Bu Geliri Ne Kadar Sürede Elde Ediyorsunuz?
+          {intl.formatMessage({
+                        id: 'addBudgetRatio',
+                      })}
               </label>
             <div className="flex align-items-center">
               <input
-                value="Günlük"
+                value={intl.formatMessage({
+                  id: 'addBudgetDaily',
+                })}
                 type="radio"
                 {...register("incomeRoutine")}
                 id="gunluk"
               />
               <label htmlFor="ingredient1" className="ml-2">
-                Günlük
+              {intl.formatMessage({
+                        id: 'addBudgetDaily',
+                      })}
               </label>
             </div>
             <div className="flex align-items-center">
               <input
                 type="radio"
                 {...register("incomeRoutine")}
-                value="Haftalık"
+                value={intl.formatMessage({
+                  id: 'addBudgetWeekly',
+                })}
                 id="haftalik"
               />
               <label htmlFor="ingredient2" className="ml-2">
-                Haftalık
+              {intl.formatMessage({
+                        id: 'addBudgetWeekly',
+                      })}
               </label>
             </div>
             <div className="flex align-items-center">
               <input
                 type="radio"
                 {...register("incomeRoutine")}
-                value="Aylık"
+                value={intl.formatMessage({
+                  id: 'addBudgetMonthly',
+                })}
                 id="aylik"
               />
               <label htmlFor="ingredient3" className="ml-2">
-                Aylık
+              {intl.formatMessage({
+                        id: 'addBudgetMonthly',
+                      })}
               </label>
             </div>
             <div className="flex align-items-center">
               <input
                 {...register("incomeRoutine")}
-                value="Yıllık"
+                value={intl.formatMessage({
+                  id: 'addBudgetYearly',
+                })}
                 type="radio"
                 id="yillik"
               />
               <label htmlFor="ingredient4" className="ml-2">
-                Yıllık
+              {intl.formatMessage({
+                        id: 'addBudgetYearly',
+                      })}
               </label>
             </div>
           </div>
-          <Button label="Ekle" className="mt-3" type="submit" />
+          <Button label={intl.formatMessage({
+                        id: 'add',
+                      })} className="mt-3" type="submit" />
         </Card>
       </div>
     </form>
