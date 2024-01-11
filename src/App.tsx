@@ -6,10 +6,12 @@ import { useLocaleStore } from "./store/useLocaleStore";
 import { IntlProvider } from "react-intl";
 import AppLocale from "./languages";
 import moment from 'moment';
+import { useThemeStore } from "./store/useThemeStore";
 
 function App() {
   const { locale, setLocale } = useLocaleStore(); // Varsayılan dil, örneğin İngilizce
   const appLocale = AppLocale[locale];
+  const {themeStatus} = useThemeStore(state => state);
 
   React.useLayoutEffect(() => {
     setLocale("tr_TR");
@@ -22,12 +24,16 @@ function App() {
     return lang;
   }, [locale]);
   return (
-    <IntlProvider locale={lang} messages={appLocale}>
-   
+    
+    <><link
+      rel="stylesheet"
+      type="text/css"
+      href={themeStatus ? '/css/light.css' : '/css/dark.css'} /><IntlProvider locale={lang} messages={appLocale}>
+
         <Navbar />
         <Dashboard />
 
-    </IntlProvider>
+      </IntlProvider></>
   );
 }
 

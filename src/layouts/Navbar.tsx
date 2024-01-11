@@ -61,8 +61,8 @@ export default function Navbar() {
         </div>
       );
   return (
-    <div className="card">
-      <Menubar  start={start} end={end} />
+    <div className="card ">
+      <Menubar className="menubar" start={start} end={end} />
     </div>
   );
 }
