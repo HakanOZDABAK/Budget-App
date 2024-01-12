@@ -23,20 +23,23 @@ export default function Dashboard() {
   }, []);
 
   return (
-<div >
-    <Routes>
+<div style={{ width: '100%', height: '100vh', display: 'flex', flexDirection: 'column' }}>
+  <Routes>
     <Route path="/" element={MainPage()} />
-      <Route path="/home" element={MainPage()} />
-      <Route path="/addBudget" element={AddBugdet()} />
-      <Route path="/expenseBudget" element={ExpenseBudget()} />
-      <Route path="/budgetsDetail" element={Budgets()} />
-    </Routes>
+    <Route path="/home" element={MainPage()} />
+    <Route path="/addBudget" element={AddBugdet()} />
+    <Route path="/expenseBudget" element={ExpenseBudget()} />
+    <Route path="/budgetsDetail" element={Budgets()} />
+  </Routes>
+  <div style={{ position: 'fixed', right: '0', bottom: '0', marginRight: '16px', marginBottom: '16px' }}>
     <div className="card">
-            <div style={{ position: 'relative',height: '350px'}}>
-                <SpeedDial onClick={() => onSwitchTheme()} direction="up" className="speeddial-bottom-right right-0 bottom-0" buttonClassName="p-button-danger" />
-            </div>
-        </div>
+      <div style={{ position: 'relative', height: '350px' }}>
+        <SpeedDial onClick={() => onSwitchTheme()} direction="up" className="speeddial-bottom-right right-0 bottom-0" buttonClassName="p-button-danger" />
+      </div>
     </div>
+  </div>
+</div>
+
 
 
   )
