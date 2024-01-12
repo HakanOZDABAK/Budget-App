@@ -25,7 +25,7 @@ function App() {
   }, [locale]);
   return (
     
-    <><link
+    < ><link
       rel="stylesheet"
       type="text/css"
       href={themeStatus ? '/css/light.css' : '/css/dark.css'} /><IntlProvider locale={lang} messages={appLocale}>
