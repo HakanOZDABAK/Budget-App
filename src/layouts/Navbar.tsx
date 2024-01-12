@@ -1,16 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Menubar } from "primereact/menubar";
-import { InputText } from "primereact/inputtext";
-import { MenuItem } from "primereact/menuitem";
-import { Badge } from "primereact/badge";
 import { Avatar } from "primereact/avatar";
-import { PanelMenu } from "primereact/panelmenu";
-import { useLocaleStore } from "../store/useLocaleStore";
-import { AppLocaleType, LanguageOptions } from "../languages";
-import { Menu } from "primereact/menu";
 import { Button } from "primereact/button";
+import { Menu } from "primereact/menu";
+import { Menubar } from "primereact/menubar";
+import { MenuItem } from "primereact/menuitem";
+import { useEffect, useRef, useState } from "react";
 import { useIntl } from "react-intl";
 import { useNavigate } from "react-router-dom";
+import { AppLocaleType, LanguageOptions } from "../languages";
+import { useLocaleStore } from "../store/useLocaleStore";
 export default function Navbar() {
     const menuLeft = useRef<Menu>(null)
     const intl = useIntl()

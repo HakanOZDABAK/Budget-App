@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react'
-import MainPage from '../pages/MainPage'
+import { SpeedDial } from 'primereact/speeddial'
+import { useEffect } from 'react'
+import { Route, Routes } from 'react-router-dom'
 import AddBugdet from '../pages/AddBugdet'
 import Budgets from '../pages/Budgets'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import ExpenseBudget from '../pages/ExpenseBudget'
-import { SpeedDial } from 'primereact/speeddial'
+import MainPage from '../pages/MainPage'
 import { useThemeStore } from '../store/useThemeStore'
 
 export default function Dashboard() {
@@ -23,7 +23,7 @@ export default function Dashboard() {
   }, []);
 
   return (
-<div style={{ width: '100%', height: '100vh', display: 'flex', flexDirection: 'column' }}>
+<div style={{ maxWidth: "120%", overflowX: "auto" }}>
   <Routes>
     <Route path="/" element={MainPage()} />
     <Route path="/home" element={MainPage()} />

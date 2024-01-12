@@ -1,7 +1,5 @@
-import React from "react";
 import { Card } from "primereact/card";
-import { Button } from "primereact/button";
-import {useIntl} from 'react-intl';
+import { useIntl } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 export default function MainPage() {
   const intl = useIntl();
