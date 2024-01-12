@@ -23,7 +23,7 @@ export default function Dashboard() {
   }, []);
 
   return (
-<div style={{ maxWidth: "120%", overflowX: "auto" }}>
+<div style={{ width: '100%', height: '100vh', display: 'flex', flexDirection: 'column' }}>
   <Routes>
     <Route path="/" element={MainPage()} />
     <Route path="/home" element={MainPage()} />
@@ -32,14 +32,13 @@ export default function Dashboard() {
     <Route path="/budgetsDetail" element={Budgets()} />
   </Routes>
   <div style={{ position: 'fixed', right: '0', bottom: '0', marginRight: '16px', marginBottom: '16px' }}>
-    <div className="card">
-      <div style={{ position: 'relative', height: '350px' }}>
+    <div className="card" style={{ width: '100%', height: '100%', position: 'relative' }}>
+      <div style={{ position: 'absolute', right: '0', bottom: '0', height: '350px' }}>
         <SpeedDial onClick={() => onSwitchTheme()} direction="up" className="speeddial-bottom-right right-0 bottom-0" buttonClassName="p-button-danger" />
       </div>
     </div>
   </div>
 </div>
-
 
 
   )
