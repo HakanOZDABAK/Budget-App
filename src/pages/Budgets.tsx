@@ -3,12 +3,14 @@ import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import { InputText } from "primereact/inputtext";
 import { useState } from "react";
+import { useIntl } from "react-intl";
 interface FilterModeOption {
   label: string;
   value: string;
 }
 
 export default function Budgets() {
+  const intl = useIntl()
   const [nodes, setNodes] = useState<any>([
     {
       id: 1000,
@@ -59,17 +61,31 @@ export default function Budgets() {
 
         emptyMessage="No customers found."
       >
-        <Column field="name" filter header="Name"></Column>
-        <Column field="country.name" filter header="Country"></Column>
+        <Column field="name" filter header={intl.formatMessage({
+                        id: 'expenseBudgetDaily',
+                      })}></Column>
+        <Column field="country.name" filter header={intl.formatMessage({
+                        id: 'expenseBudgetDaily',
+                      })}></Column>
         <Column
           field="representative.name"
           filter
-          header="Representative"
+          header={intl.formatMessage({
+            id: 'expenseBudgetDaily',
+          })}
         ></Column>
-        <Column field="company" filter header="Company"></Column>
-        <Column field="data" filter header="Company"></Column>
-        <Column field="status" filter header="Company"></Column>
-        <Column field="company" filter header="Company"></Column>
+        <Column field="company" filter header={intl.formatMessage({
+                        id: 'expenseBudgetDaily',
+                      })}></Column>
+        <Column field="data" filter header={intl.formatMessage({
+                        id: 'expenseBudgetDaily',
+                      })}></Column>
+        <Column field="status" filter header={intl.formatMessage({
+                        id: 'expenseBudgetDaily',
+                      })}></Column>
+        <Column field="company" filter header={intl.formatMessage({
+                        id: 'expenseBudgetDaily',
+                      })}></Column>
       </DataTable>
     </div>
   );
