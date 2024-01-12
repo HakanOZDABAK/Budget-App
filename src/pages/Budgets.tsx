@@ -55,7 +55,7 @@ export default function Budgets() {
         value={nodes}
         scrollable
         scrollHeight="400px"
-        style={{ minWidth: "50rem" }}
+        style={{ minWidth: "auto" }}
 
         emptyMessage="No customers found."
       >
