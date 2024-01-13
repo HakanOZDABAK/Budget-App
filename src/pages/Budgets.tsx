@@ -10,7 +10,7 @@ interface FilterModeOption {
 }
 
 export default function Budgets() {
-  const intl = useIntl()
+  const intl = useIntl();
   const [nodes, setNodes] = useState<any>([
     {
       id: 1000,
@@ -50,7 +50,6 @@ export default function Budgets() {
     },
   ]);
 
-
   return (
     <div className="card mt-5">
       <DataTable
@@ -58,34 +57,43 @@ export default function Budgets() {
         scrollable
         scrollHeight="400px"
         style={{ minWidth: "auto" }}
-
         emptyMessage="No customers found."
       >
-        <Column field="name" filter header={intl.formatMessage({
-                        id: 'expenseBudgetDaily',
-                      })}></Column>
-        <Column field="country.name" filter header={intl.formatMessage({
-                        id: 'expenseBudgetDaily',
-                      })}></Column>
+        <Column
+          field="name"
+          filter
+          header={intl.formatMessage({
+            id: "budgetName",
+          })}
+        ></Column>
+        <Column
+          body={(rowData) => (
+            <span
+              style={{ backgroundColor: rowData.balance < 1000 ? "" : "red" }}
+            >
+              {rowData.balance}
+            </span>
+          )}
+          field="balance"
+          filter
+          header={intl.formatMessage({
+            id: "budgetAddTime",
+          })}
+        ></Column>
         <Column
           field="representative.name"
           filter
           header={intl.formatMessage({
-            id: 'expenseBudgetDaily',
+            id: "budgetValue",
           })}
         ></Column>
-        <Column field="company" filter header={intl.formatMessage({
-                        id: 'expenseBudgetDaily',
-                      })}></Column>
-        <Column field="data" filter header={intl.formatMessage({
-                        id: 'expenseBudgetDaily',
-                      })}></Column>
-        <Column field="status" filter header={intl.formatMessage({
-                        id: 'expenseBudgetDaily',
-                      })}></Column>
-        <Column field="company" filter header={intl.formatMessage({
-                        id: 'expenseBudgetDaily',
-                      })}></Column>
+        <Column
+          field="company"
+          filter
+          header={intl.formatMessage({
+            id: "budgetOften",
+          })}
+        ></Column>
       </DataTable>
     </div>
   );

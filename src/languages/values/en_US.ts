@@ -24,6 +24,10 @@ const en:LangType={
     expenseBudgetMonthly: "monthly",
     expenseBudgetYearly: "yearly",
     add: "Add",
-    languages:"Languages"
+    languages: "Languages",
+    budgetName: "Name",
+    budgetAddTime: "Add Time",
+    budgetValue: "Value",
+    budgetOften: "How Often?"
 }
 export default en;

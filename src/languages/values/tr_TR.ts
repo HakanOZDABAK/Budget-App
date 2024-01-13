@@ -24,6 +24,10 @@ const tr: LangType ={
     expenseBudgetMonthly: "Aylık",
     expenseBudgetYearly: "Yıllık",
     add: "Ekle",
-    languages:"Diller",
+    languages: "Diller",
+    budgetName: "İsim",
+    budgetAddTime: "Ekleme Tarihi",
+    budgetValue: "Değer",
+    budgetOften: "Hangi Sıklıkla"
 }
 export default tr;

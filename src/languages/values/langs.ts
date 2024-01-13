@@ -24,5 +24,9 @@ export type LangType = {
  expenseBudgetYearly:string;
  add:string;
  languages:string;
+ budgetName:string;
+ budgetAddTime:string;
+ budgetValue:string;
+ budgetOften:string;
 
 }
