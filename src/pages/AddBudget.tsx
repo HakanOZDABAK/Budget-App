@@ -3,7 +3,12 @@ import { Card } from "primereact/card";
 import { InputText } from "primereact/inputtext";
 import { useForm } from "react-hook-form";
 import { useIntl } from "react-intl";
-export default function AddBugdet() {
+import { useLoginStore } from "../store/useLoginStore";
+import { BudgetService } from "../service/BudgetServices";
+import moment from "moment";
+export default function AddBudget() {
+  const {token} = useLoginStore()
+  const today = moment().format('DD.MM.YYYY');
   const intl=useIntl()
   const {
     register,
@@ -12,7 +17,8 @@ export default function AddBugdet() {
     setValue,
   } = useForm();
   const onSubmit = (data: any) => {
-    console.log(Object.keys(errors).length === 0 ? data : errors);
+   let budgetService = new BudgetService()
+   return budgetService.addBudget({...data,addTime:today},token).then(result=>console.log(result))
   };
 
   return (
@@ -26,7 +32,7 @@ export default function AddBugdet() {
             placeholder={intl.formatMessage({
               id: 'addBudgetInputNamePlace',
             })}
-            {...register("incomeName", {})}
+            {...register("budgetName", {})}
           />
           <InputText
             className="mt-3"
@@ -34,7 +40,7 @@ export default function AddBugdet() {
             placeholder={intl.formatMessage({
               id: 'addBudgetInputValue',
             })}
-            {...register("incomeValue", { required: true, min: 0 })}
+            {...register("budgetValue", { required: true, min: 0 })}
           />
           <div className="mt-3 flex flex-wrap gap-3">
           <label className="ml-2">
@@ -48,7 +54,7 @@ export default function AddBugdet() {
                   id: 'addBudgetDaily',
                 })}
                 type="radio"
-                {...register("incomeRoutine")}
+                {...register("budgetOften")}
                 id="gunluk"
               />
               <label htmlFor="ingredient1" className="ml-2">
@@ -60,7 +66,7 @@ export default function AddBugdet() {
             <div className="flex align-items-center">
               <input
                 type="radio"
-                {...register("incomeRoutine")}
+                {...register("budgetOften")}
                 value={intl.formatMessage({
                   id: 'addBudgetWeekly',
                 })}
@@ -75,7 +81,7 @@ export default function AddBugdet() {
             <div className="flex align-items-center">
               <input
                 type="radio"
-                {...register("incomeRoutine")}
+                {...register("budgetOften")}
                 value={intl.formatMessage({
                   id: 'addBudgetMonthly',
                 })}
@@ -89,7 +95,7 @@ export default function AddBugdet() {
             </div>
             <div className="flex align-items-center">
               <input
-                {...register("incomeRoutine")}
+                {...register("budgetOften")}
                 value={intl.formatMessage({
                   id: 'addBudgetYearly',
                 })}

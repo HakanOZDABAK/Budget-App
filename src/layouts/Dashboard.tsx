@@ -1,15 +1,25 @@
 import { SpeedDial } from "primereact/speeddial";
-import { useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
-import AddBugdet from "../pages/AddBugdet";
+import { useEffect, useState } from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Budgets from "../pages/Budgets";
 import ExpenseBudget from "../pages/ExpenseBudget";
 import MainPage from "../pages/MainPage";
 import { useThemeStore } from "../store/useThemeStore";
+import { useLoginStore } from "../store/useLoginStore";
+import Login from "../pages/Login";
+import AddBudget from "../pages/AddBudget";
 
 export default function Dashboard() {
+  const privateRoutes = [
+    { path: '/', element: MainPage },
+    { path: '/home', element: MainPage },
+    { path: '/addBudget', element: AddBudget },
+    { path: '/expenseBudget', element: ExpenseBudget },
+    { path: '/budgetsDetail', element: Budgets },
+  ];
   const { themeStatus, setThemeStatus } = useThemeStore((state) => state);
-
+  const isLoggedIn = useLoginStore((state) => state.login);
+  console.log(isLoggedIn)
   const onSwitchTheme = () => {
     setThemeStatus(!themeStatus);
     localStorage.setItem("theme", themeStatus ? "dark" : "light");
@@ -22,8 +32,17 @@ export default function Dashboard() {
     } else {
       setThemeStatus(true); // Default to 'light' if theme is not stored or invalid
     }
+
   }, []);
 
+  const  PrivateRoute =({ children }:any) => {
+  
+    if (!isLoggedIn) {
+      return <Navigate to='/login'  />
+    }
+  
+    return children;
+  }
   return (
     <div
       style={{
@@ -33,13 +52,16 @@ export default function Dashboard() {
         flexDirection: "column",
       }}
     >
-      <Routes>
-        <Route path="/" element={MainPage()} />
-        <Route path="/home" element={MainPage()} />
-        <Route path="/addBudget" element={AddBugdet()} />
-        <Route path="/expenseBudget" element={ExpenseBudget()} />
-        <Route path="/budgetsDetail" element={Budgets()} />
-      </Routes>
+    <Routes>
+      {privateRoutes.map(({ path, element }) => (
+        <Route
+          key={path}
+          path={path}
+          element={<PrivateRoute>{element()}</PrivateRoute>}
+        />
+      ))}
+      <Route path="/login" element={<Login />} />
+    </Routes>
       <div
         style={{
           position: "fixed",
