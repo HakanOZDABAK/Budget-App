@@ -14,13 +14,16 @@ interface ProfileData {
 }
 
 export default function Login() {
-  const intl = useIntl()
+  const intl = useIntl();
   const { login, setLogin, setToken } = useLoginStore();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const navigate = useNavigate();
   const [checked, setChecked] = useState<boolean>(false);
-  const [profile, setProfile] = useState<ProfileData>({email:"",password:""});
+  const [profile, setProfile] = useState<ProfileData>({
+    email: "",
+    password: "",
+  });
 
   const Login = async (email: string, password: string) => {
     const profileInformation = { email, password };
@@ -54,13 +57,15 @@ export default function Login() {
       setChecked(true);
     }
   }, []);
-  
+
   return (
     <div className="card ">
       <div className="grid flex justify-content-center md:flex-row">
         <div className="w-full md:w-5 flex flex-column align-items-center justify-content-center gap-3 py-5">
           <div className="flex flex-wrap justify-content-center align-items-center gap-2">
-            <label className="w-6rem">{intl.formatMessage({id:"email"})}</label>
+            <label className="w-6rem">
+              {intl.formatMessage({ id: "email" })}
+            </label>
             <InputText
               id="username"
               type="text"
@@ -70,7 +75,9 @@ export default function Login() {
             />
           </div>
           <div className="flex flex-wrap justify-content-center align-items-center gap-2">
-            <label className="w-6rem">{intl.formatMessage({id:"password"})}</label>
+            <label className="w-6rem">
+              {intl.formatMessage({ id: "password" })}
+            </label>
             <InputText
               id="password"
               type="password"
@@ -79,11 +86,16 @@ export default function Login() {
               onChange={(event) => setPassword(event.target.value)}
             />
           </div>
-          <Checkbox
-            className="grid"
-            onChange={(e) => setChecked(e.checked || false)}
-            checked={checked}
-          ></Checkbox>
+          <div className="flex items-center">
+            <label className="w-4rem">
+              {intl.formatMessage({ id: "rememberMe" })}
+            </label>
+            <Checkbox
+              className="grid mt-1 ml-2"
+              onChange={(e) => setChecked(e.checked || false)}
+              checked={checked}
+            ></Checkbox>
+          </div>
           <Button
             onClick={() => {
               Login(email, password);

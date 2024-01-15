@@ -3,7 +3,7 @@ import { create } from "zustand";
 type ILogin ={
    
     login:boolean
-    token:string
+    token:any
     setLogin:any,
     setToken:any
 
@@ -15,7 +15,7 @@ export const useLoginStore = create<ILogin>(set =>{
 
      login:false,
      setLogin:(login=true)=>set(()=>({login})),
-     token:"",
+     token:null,
      setToken: (token:string) => set(() => ({ token })),
   }
 

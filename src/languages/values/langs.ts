@@ -30,5 +30,6 @@ export type LangType = {
  budgetOften:string;
  email:string;
  password:string;
+ rememberMe:string;
 
 }

@@ -2,8 +2,10 @@ import { FilterMatchMode } from "primereact/api";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import { InputText } from "primereact/inputtext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useIntl } from "react-intl";
+import { BudgetService } from "../service/BudgetServices";
+import { useLoginStore } from "../store/useLoginStore";
 interface FilterModeOption {
   label: string;
   value: string;
@@ -11,57 +13,45 @@ interface FilterModeOption {
 
 export default function Budgets() {
   const intl = useIntl();
-  const [nodes, setNodes] = useState<any>([
-    {
-      id: 1000,
-      name: "James Butt",
-      country: {
-        name: "Algeria",
-        code: "dz",
-      },
-      company: "Benton, John B Jr",
-      date: "2015-09-13",
-      status: "unqualified",
-      verified: true,
-      activity: 17,
-      representative: {
-        name: "Ioni Bowcher",
-        image: "ionibowcher.png",
-      },
-      balance: 70663,
-    },
-    {
-      id: 1001,
-      name: "Anes Butt",
-      country: {
-        name: "Turkey",
-        code: "dz",
-      },
-      company: "Benton, John B Jr",
-      date: "2015-09-13",
-      status: "unqualified",
-      verified: true,
-      activity: 17,
-      representative: {
-        name: "Ioni Bowcher",
-        image: "ionibowcher.png",
-      },
-      balance: 70663,
-    },
-  ]);
+const [data,setData] = useState<any>()
+const {token} = useLoginStore()
+
+useEffect(() => {
+  const fetchData = async () => {
+    if(token){
+      let budgetService = new BudgetService();
+      try {
+        await budgetService.getAllBudget(token).then(result =>setData(result.data))
+
+  
+      } catch (error) {
+
+        console.error('Veri çekme hatası:', error);
+      }
+    }else{
+      setData(null)
+    }
+
+  };
+
+  fetchData();
+
+}, [token]);
+
 
   return (
     <div className="card mt-5">
       <DataTable
-        value={nodes}
+        value={data}
         scrollable
         scrollHeight="400px"
         style={{ minWidth: "auto" }}
         emptyMessage="No customers found."
       >
         <Column
-          field="name"
+          field="budgetName"
           filter
+          frozen 
           header={intl.formatMessage({
             id: "budgetName",
           })}
@@ -74,21 +64,21 @@ export default function Budgets() {
               {rowData.balance}
             </span>
           )}
-          field="balance"
+          field="addTime"
           filter
           header={intl.formatMessage({
             id: "budgetAddTime",
           })}
         ></Column>
         <Column
-          field="representative.name"
+          field="budgetValue"
           filter
           header={intl.formatMessage({
             id: "budgetValue",
           })}
         ></Column>
         <Column
-          field="company"
+          field="budgetOften"
           filter
           header={intl.formatMessage({
             id: "budgetOften",

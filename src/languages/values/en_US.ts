@@ -30,6 +30,7 @@ const en:LangType={
     budgetValue: "Value",
     budgetOften: "How Often?",
     email: "E-mail",
-    password: "Password"
+    password: "Password",
+    rememberMe: "Remember Me"
 }
 export default en;
