@@ -28,6 +28,8 @@ const tr: LangType ={
     budgetName: "İsim",
     budgetAddTime: "Ekleme Tarihi",
     budgetValue: "Değer",
-    budgetOften: "Hangi Sıklıkla"
+    budgetOften: "Hangi Sıklıkla",
+    email: "E-posta",
+    password: "Şifre",
 }
 export default tr;

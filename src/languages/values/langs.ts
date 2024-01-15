@@ -28,5 +28,7 @@ export type LangType = {
  budgetAddTime:string;
  budgetValue:string;
  budgetOften:string;
+ email:string;
+ password:string;
 
 }

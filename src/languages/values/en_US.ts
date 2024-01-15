@@ -28,6 +28,8 @@ const en:LangType={
     budgetName: "Name",
     budgetAddTime: "Add Time",
     budgetValue: "Value",
-    budgetOften: "How Often?"
+    budgetOften: "How Often?",
+    email: "E-mail",
+    password: "Password"
 }
 export default en;
