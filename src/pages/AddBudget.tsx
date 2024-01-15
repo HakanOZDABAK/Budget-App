@@ -18,7 +18,8 @@ export default function AddBudget() {
   } = useForm();
   const onSubmit = (data: any) => {
    let budgetService = new BudgetService()
-   return budgetService.addBudget({...data,addTime:today},token).then(result=>console.log(result))
+   const allData = {...data,addTime:today}
+    return budgetService.addBudget(allData, token)
   };
 
   return (
