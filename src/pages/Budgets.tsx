@@ -20,18 +20,19 @@ export default function Budgets() {
   const [data, setData] = useState<any>();
   const { token } = useLoginStore();
   const location = useLocation();
+  let budgetService = new BudgetService();
 
   useEffect(() => {
     if (token) {
-      let budgetService = new BudgetService();
+
       budgetService.getAllBudget(token).then((result) => setData(result.data));
     } else {
       setData(null);
     }
   }, [token, location.pathname]);
 
-   const handleDeleteData = ()=>{
-
+   const handleDeleteData = (id:string)=>{
+    return budgetService.deleteBudget(id,token).then(()=>console.log("Başarı ile silindi"))
     
    }
 
@@ -85,7 +86,7 @@ export default function Budgets() {
               <i
                 className="pi pi-delete-left"
                 style={{ fontSize: "2rem" }}
-                onClick={() => console.log(rowData.id)}
+                onClick={() => handleDeleteData(rowData.id)}
               ></i>
             );
           }}
