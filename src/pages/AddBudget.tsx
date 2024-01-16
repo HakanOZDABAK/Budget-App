@@ -8,7 +8,8 @@ import { BudgetService } from "../service/BudgetServices";
 import moment from "moment";
 export default function AddBudget() {
   const {token} = useLoginStore()
-  const today = moment().format('DD.MM.YYYY');
+  const today = moment().format('YYYY-MM-DD');
+
   const intl=useIntl()
   const {
     register,

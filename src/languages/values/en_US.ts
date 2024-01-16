@@ -31,6 +31,7 @@ const en:LangType={
     budgetOften: "How Often?",
     email: "E-mail",
     password: "Password",
-    rememberMe: "Remember Me"
+    rememberMe: "Remember Me",
+    delete: "Delete"
 }
 export default en;

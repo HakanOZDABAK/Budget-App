@@ -31,6 +31,7 @@ const tr: LangType ={
     budgetOften: "Hangi Sıklıkla",
     email: "E-posta",
     password: "Şifre",
-    rememberMe: "Beni Hatırla"
+    rememberMe: "Beni Hatırla",
+    delete: "Sil"
 }
 export default tr;

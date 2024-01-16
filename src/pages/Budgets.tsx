@@ -6,6 +6,10 @@ import { useEffect, useState } from "react";
 import { useIntl } from "react-intl";
 import { BudgetService } from "../service/BudgetServices";
 import { useLoginStore } from "../store/useLoginStore";
+
+import { useLocation } from "react-router-dom";
+import { Button } from "primereact/button";
+
 interface FilterModeOption {
   label: string;
   value: string;
@@ -13,31 +17,21 @@ interface FilterModeOption {
 
 export default function Budgets() {
   const intl = useIntl();
-const [data,setData] = useState<any>()
-const {token} = useLoginStore()
+  const [data, setData] = useState<any>();
+  const { token } = useLoginStore();
+  const location = useLocation();
 
-useEffect(() => {
-  const fetchData = async () => {
-    if(token){
+  useEffect(() => {
+    if (token) {
       let budgetService = new BudgetService();
-      try {
-        await budgetService.getAllBudget(token).then(result =>setData(result.data))
 
-  
-      } catch (error) {
-
-        console.error('Veri çekme hatası:', error);
-      }
-    }else{
-      setData(null)
+      budgetService.getAllBudget(token).then((result) => setData(result.data));
+    } else {
+      setData(null);
     }
 
-  };
-
-  fetchData();
-
-}, [token]);
-
+    console.log(data);
+  }, [token, location.pathname]);
 
   return (
     <div className="card mt-5">
@@ -51,24 +45,23 @@ useEffect(() => {
         <Column
           field="budgetName"
           filter
-          frozen 
+          frozen
           header={intl.formatMessage({
             id: "budgetName",
           })}
         ></Column>
         <Column
-          body={(rowData) => (
-            <span
-              style={{ backgroundColor: rowData.balance < 1000 ? "" : "red" }}
-            >
-              {rowData.balance}
-            </span>
-          )}
           field="addTime"
           filter
           header={intl.formatMessage({
             id: "budgetAddTime",
           })}
+          body={(rowData) => {
+            const formattedDate = new Date(
+              rowData.addTime
+            ).toLocaleDateString();
+            return <span>{formattedDate}</span>;
+          }}
         ></Column>
         <Column
           field="budgetValue"
@@ -83,6 +76,10 @@ useEffect(() => {
           header={intl.formatMessage({
             id: "budgetOften",
           })}
+        ></Column>
+        <Column
+          header={intl.formatMessage({id:"delete"})}
+          body={<i className="pi pi-delete-left" style={{ fontSize: "2rem" }}></i>}
         ></Column>
       </DataTable>
     </div>

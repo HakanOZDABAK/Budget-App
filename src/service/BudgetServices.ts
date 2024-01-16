@@ -1,8 +1,8 @@
 import axios from "axios";
 
 export class BudgetService {
-  getAllBudget(token: string) {
-    return axios.get("http://localhost:8081/api/v1/budget/getbudgetall", {
+ async getAllBudget(token: string) {
+    return await axios.get("http://localhost:8081/api/v1/budget/getbudgetall", {
       headers: {
         Accept: "*/*",
         Authorization: `Bearer ${token}`,
@@ -13,11 +13,11 @@ export class BudgetService {
   async addBudget(budgetData: any, token: string) {
     try {
       const result = await axios.post(
-        "http://localhost:8081/api/v1/budget/addBudget",
+        "http://127.0.0.1:8081/api/v1/budget/addBudget",
         budgetData,
         {
           headers: {
-            'accept': '*/*',
+            'Accept': '*/*',
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
