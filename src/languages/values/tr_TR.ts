@@ -32,6 +32,7 @@ const tr: LangType ={
     email: "E-posta",
     password: "Şifre",
     rememberMe: "Beni Hatırla",
-    delete: "Sil"
+    delete: "Sil",
+    login: "Giriş Yap"
 }
 export default tr;

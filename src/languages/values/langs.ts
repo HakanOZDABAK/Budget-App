@@ -32,5 +32,6 @@ export type LangType = {
  password:string;
  rememberMe:string;
  delete: string;
+ login: string;
 
 }

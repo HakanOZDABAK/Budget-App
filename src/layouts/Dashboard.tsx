@@ -19,7 +19,7 @@ export default function Dashboard() {
   ];
   const { themeStatus, setThemeStatus } = useThemeStore((state) => state);
   const isLoggedIn = useLoginStore((state) => state.login);
-  console.log(isLoggedIn)
+
   const onSwitchTheme = () => {
     setThemeStatus(!themeStatus);
     localStorage.setItem("theme", themeStatus ? "dark" : "light");

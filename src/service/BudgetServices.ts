@@ -31,4 +31,25 @@ export class BudgetService {
       throw error; 
     }
   }
+  async deleteBudget(id: string, token: string) {
+    try {
+      const result = await axios.post(
+        "http://127.0.0.1:8081/api/v1/budget/addBudget",
+        budgetData,
+        {
+          headers: {
+            'Accept': '*/*',
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      return result.data;
+    } catch (error) {
+  
+      console.error("Hata:", error);
+      throw error; 
+    }
+  }
 }

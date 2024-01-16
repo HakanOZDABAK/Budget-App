@@ -59,7 +59,7 @@ export default function Login() {
   }, []);
 
   return (
-    <div className="card ">
+    <div className=" card  ">
       <div className="grid flex justify-content-center md:flex-row">
         <div className="w-full md:w-5 flex flex-column align-items-center justify-content-center gap-3 py-5">
           <div className="flex flex-wrap justify-content-center align-items-center gap-2">
@@ -87,27 +87,25 @@ export default function Login() {
             />
           </div>
           <div className="flex items-center">
-            <label className="w-4rem">
+           
               {intl.formatMessage({ id: "rememberMe" })}
-            </label>
+
             <Checkbox
               className="grid mt-1 ml-2"
               onChange={(e) => setChecked(e.checked || false)}
               checked={checked}
             ></Checkbox>
           </div>
-          <Button
+          <Button 
             onClick={() => {
               Login(email, password);
             }}
-            label="Login"
+            label={intl.formatMessage({id:"login"})}
             icon="pi pi-user"
-            className="w-10rem mx-auto"
+            className=" flex items-center w-10rem mx-auto "
           ></Button>
         </div>
-        <div className="w-full md:w-2">
-          <Divider layout="vertical" className="hidden md:flex"></Divider>
-        </div>
+
       </div>
     </div>
   );

@@ -24,22 +24,23 @@ export default function Budgets() {
   useEffect(() => {
     if (token) {
       let budgetService = new BudgetService();
-
       budgetService.getAllBudget(token).then((result) => setData(result.data));
     } else {
       setData(null);
     }
-
-    console.log(data);
   }, [token, location.pathname]);
+
+   const handleDeleteData = ()=>{
+
+    
+   }
 
   return (
     <div className="card mt-5">
       <DataTable
         value={data}
         scrollable
-        scrollHeight="400px"
-        style={{ minWidth: "auto" }}
+        scrollHeight="600px"
         emptyMessage="No customers found."
       >
         <Column
@@ -78,8 +79,16 @@ export default function Budgets() {
           })}
         ></Column>
         <Column
-          header={intl.formatMessage({id:"delete"})}
-          body={<i className="pi pi-delete-left" style={{ fontSize: "2rem" }}></i>}
+          header={intl.formatMessage({ id: "delete" })}
+          body={(rowData) => {
+            return (
+              <i
+                className="pi pi-delete-left"
+                style={{ fontSize: "2rem" }}
+                onClick={() => console.log(rowData.id)}
+              ></i>
+            );
+          }}
         ></Column>
       </DataTable>
     </div>
