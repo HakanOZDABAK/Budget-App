@@ -3,8 +3,14 @@ import { Card } from "primereact/card";
 import { InputText } from "primereact/inputtext";
 import { useForm } from "react-hook-form";
 import { useIntl } from "react-intl";
+import { useLoginStore } from "../store/useLoginStore";
+import moment from "moment";
+import { BudgetService } from "../service/BudgetServices";
 export default function ExpenseBudget() {
-const intl= useIntl()
+  const {token} = useLoginStore()
+  const today = moment().format('YYYY-MM-DD');
+
+  const intl=useIntl()
   const {
     register,
     handleSubmit,
@@ -12,7 +18,9 @@ const intl= useIntl()
     setValue,
   } = useForm();
   const onSubmit = (data: any) => {
-    console.log(Object.keys(errors).length === 0 ? data : errors);
+   let budgetService = new BudgetService()
+   const allData = {...data,addTime:today}
+    return budgetService.addBudget(allData, token)
   };
 
   return (

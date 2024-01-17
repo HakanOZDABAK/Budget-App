@@ -9,37 +9,36 @@ import { useLoginStore } from "../store/useLoginStore";
 
 import { useLocation } from "react-router-dom";
 import { Button } from "primereact/button";
-
-interface FilterModeOption {
-  label: string;
-  value: string;
-}
+import { useDataStore } from "../store/useDataStore";
 
 export default function Budgets() {
   const intl = useIntl();
-  const [data, setData] = useState<any>();
   const { token } = useLoginStore();
+  const {allData,setAllData} = useDataStore()
   const location = useLocation();
   let budgetService = new BudgetService();
 
   useEffect(() => {
     if (token) {
 
-      budgetService.getAllBudget(token).then((result) => setData(result.data));
+      budgetService.getAllBudget(token).then((result) => setAllData(result.data));
     } else {
-      setData(null);
+      setAllData(null);
     }
   }, [token, location.pathname]);
 
-   const handleDeleteData = (id:string)=>{
-    return budgetService.deleteBudget(id,token).then(()=>console.log("Başarı ile silindi"))
-    
+   const handleDeleteData = async (id:string)=>{
+    await budgetService.deleteBudget(id, token);
+    const updatedData = allData.filter((item:any) => item.id !== id);
+    setAllData(updatedData);
+
+
    }
 
   return (
     <div className="card mt-5">
       <DataTable
-        value={data}
+        value={allData}
         scrollable
         scrollHeight="600px"
         emptyMessage="No customers found."
