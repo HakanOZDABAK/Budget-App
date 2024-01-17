@@ -2,7 +2,7 @@ import axios from "axios";
 
 export class BudgetService {
   async getAllBudget(token: string) {
-    return await axios.get("http://localhost:8081/api/v1/budget/getbudgetall", {
+    return await axios.get("http://localhost:8081/api/v1/budget/getBudgetAll", {
       headers: {
         Accept: "*/*",
         Authorization: `Bearer ${token}`,
@@ -34,6 +34,24 @@ export class BudgetService {
     try {
       const result = await axios.delete(
         `http://localhost:8081/api/v1/budget/deleteBudget/${id}`,
+        {
+          headers: {
+            Accept: "*/*",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      return result
+    } catch (error) {
+      console.error("Hata:", error);
+      throw error;
+    }
+  }
+  async getBudgetById(id: string, token: string) {
+    try {
+      const result = await axios.get(
+        `http://localhost:8081/api/v1/budget/getBudgetById/${id}`,
         {
           headers: {
             Accept: "*/*",

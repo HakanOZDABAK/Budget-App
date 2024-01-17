@@ -32,7 +32,7 @@ const en:LangType={
     email: "E-mail",
     password: "Password",
     rememberMe: "Remember Me",
-    delete: "Delete",
+    deleteAndUpdate: "Delete/Update",
     login: "Login"
 }
 export default en;

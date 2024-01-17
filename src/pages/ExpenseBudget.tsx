@@ -6,11 +6,12 @@ import { useIntl } from "react-intl";
 import { useLoginStore } from "../store/useLoginStore";
 import moment from "moment";
 import { BudgetService } from "../service/BudgetServices";
+import { all } from "axios";
 export default function ExpenseBudget() {
-  const {token} = useLoginStore()
-  const today = moment().format('YYYY-MM-DD');
+  const { token } = useLoginStore();
+  const today = moment().format("YYYY-MM-DD");
 
-  const intl=useIntl()
+  const intl = useIntl();
   const {
     register,
     handleSubmit,
@@ -18,102 +19,116 @@ export default function ExpenseBudget() {
     setValue,
   } = useForm();
   const onSubmit = (data: any) => {
-   let budgetService = new BudgetService()
-   const allData = {...data,addTime:today}
-    return budgetService.addBudget(allData, token)
+    let budgetService = new BudgetService();
+    const allData = { ...data, addTime: today };
+    console.log(allData);
+    return budgetService.addBudget(allData, token);
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="mt-5 card flex justify-content-center">
-        <Card title={intl.formatMessage({
-                        id: 'expenseBudgetCardName',
-                      })}className="bg-red-200 md:w-25rem">
+        <Card
+          title={intl.formatMessage({
+            id: "expenseBudgetCardName",
+          })}
+          className="bg-red-200 md:w-25rem"
+        >
           <InputText
             type="text"
             placeholder={intl.formatMessage({
-              id: 'expenseBudgetInputName',
+              id: "expenseBudgetInputName",
             })}
-            {...register("incomeName", {})}
+            {...register("budgetName", {})}
           />
           <InputText
             className="mt-3"
             type="text"
             placeholder={intl.formatMessage({
-              id: 'expenseBudgetInputValue',
+              id: "expenseBudgetInputValue",
             })}
-            {...register("incomeValue", { required: true, min: 0 })}
+            {...register("budgetValue", {
+              required: true,
+              setValueAs: (value) => {
+                const numericValue = parseFloat(value);
+                return isNaN(numericValue) ? "" : `-${Math.abs(numericValue)}`;
+              },
+            })}
           />
           <div className="mt-3 flex flex-wrap gap-3">
-          <label className="ml-2">
-          {intl.formatMessage({
-                        id: 'expenseBudgetRatio',
-                      })}
-              </label>
+            <label className="ml-2">
+              {intl.formatMessage({
+                id: "expenseBudgetRatio",
+              })}
+            </label>
             <div className="flex align-items-center">
               <input
                 value={intl.formatMessage({
-                  id: 'expenseBudgetDaily',
+                  id: "expenseBudgetDaily",
                 })}
                 type="radio"
-                {...register("incomeRoutine")}
+                {...register("budgetOften")}
                 id="gunluk"
               />
               <label htmlFor="ingredient1" className="ml-2">
-              {intl.formatMessage({
-                        id: 'expenseBudgetDaily',
-                      })}
+                {intl.formatMessage({
+                  id: "expenseBudgetDaily",
+                })}
               </label>
             </div>
             <div className="flex align-items-center">
               <input
                 type="radio"
-                {...register("incomeRoutine")}
+                {...register("budgetOften")}
                 value={intl.formatMessage({
-                  id: 'expenseBudgetWeekly',
+                  id: "expenseBudgetWeekly",
                 })}
                 id="haftalik"
               />
               <label htmlFor="ingredient2" className="ml-2">
-              {intl.formatMessage({
-                        id: 'expenseBudgetWeekly',
-                      })}
+                {intl.formatMessage({
+                  id: "expenseBudgetWeekly",
+                })}
               </label>
             </div>
             <div className="flex align-items-center">
               <input
                 type="radio"
-                {...register("incomeRoutine")}
+                {...register("budgetOften")}
                 value={intl.formatMessage({
-                  id: 'expenseBudgetMonthly',
+                  id: "expenseBudgetMonthly",
                 })}
                 id="aylik"
               />
               <label htmlFor="ingredient3" className="ml-2">
-              {intl.formatMessage({
-                        id: 'expenseBudgetMonthly',
-                      })}
+                {intl.formatMessage({
+                  id: "expenseBudgetMonthly",
+                })}
               </label>
             </div>
             <div className="flex align-items-center">
               <input
-                {...register("incomeRoutine")}
+                {...register("budgetOften")}
                 value={intl.formatMessage({
-                  id: 'expenseBudgetYearly',
+                  id: "expenseBudgetYearly",
                 })}
                 type="radio"
                 id="yillik"
               />
               <label htmlFor="ingredient4" className="ml-2">
-              {intl.formatMessage({
-                        id: 'expenseBudgetYearly',
-                      })}
+                {intl.formatMessage({
+                  id: "expenseBudgetYearly",
+                })}
               </label>
             </div>
           </div>
-          <Button label={intl.formatMessage({
-                        id: 'add',
-                      })} className="mt-3" type="submit" />
+          <Button
+            label={intl.formatMessage({
+              id: "add",
+            })}
+            className="mt-3"
+            type="submit"
+          />
         </Card>
       </div>
     </form>
