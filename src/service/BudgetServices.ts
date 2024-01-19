@@ -66,4 +66,24 @@ export class BudgetService {
       throw error;
     }
   }
+  async updateBudget(budgetData: any, token: string) {
+    try {
+      const result = await axios.put(
+        "http://localhost:8081/api/v1/budget/updateBudget",
+        budgetData,
+        {
+          headers: {
+            Accept: "*/*",
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      return result.data;
+    } catch (error) {
+      console.error("Hata:", error);
+      throw error;
+    }
+  }
 }

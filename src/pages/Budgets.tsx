@@ -19,7 +19,7 @@ export default function Budgets() {
   const { allData, setAllData } = useDataStore();
   const location = useLocation();
   const [visible, setVisible] = useState<boolean>(false);
-  const [selectedData,setSelectedData] =useState<any>();
+  const [selectedData, setSelectedData] = useState<any>();
   let budgetService = new BudgetService();
 
   useEffect(() => {
@@ -38,11 +38,34 @@ export default function Budgets() {
     setAllData(updatedData);
   };
 
-  const handleEditPopUp = (id: string) => {
-    setSelectedData(budgetService.getBudgetById(id,token))
-    setVisible(true)
-
+  const handleEditPopUp = async (id: string) => {
+    const budgetData = await budgetService.getBudgetById(id, token);
+    setSelectedData(budgetData);
+    setVisible(true);
   };
+
+  const handleUpdateData = (data: any, token: string) => {
+    budgetService
+      .updateBudget(data, token)
+      .then(() => console.log("Başarılı"));
+      console.log(selectedData)
+  };
+  const footerContent = (
+    <div>
+      <Button
+        label="No"
+        icon="pi pi-times"
+        onClick={() => setVisible(false)}
+        className="p-button-text"
+      />
+      <Button
+        label="Yes"
+        icon="pi pi-check"
+        onClick={() => handleUpdateData(selectedData, token)}
+        autoFocus
+      />
+    </div>
+  );
 
   return (
     <div className="card mt-5">
@@ -122,11 +145,19 @@ export default function Budgets() {
         header="Header"
         visible={visible}
         onHide={() => setVisible(false)}
-        style={{ width: '50vw' }}
-        breakpoints={{ '960px': '75vw', '641px': '100vw' }}
+        style={{ width: "50vw" }}
+        breakpoints={{ "960px": "75vw", "641px": "100vw" }}
+        footer={footerContent}
         content={null}
       >
-      HELLO WORLD
+        <div className="card flex justify-content-center">
+          <InputText
+            value={selectedData?.budgetValue || ""}
+            onChange={(e) =>
+              setSelectedData({ ...selectedData, budgetValue: e.target.value })
+            }
+          />
+        </div>
       </Dialog>
     </div>
   );
