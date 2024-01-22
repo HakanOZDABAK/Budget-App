@@ -2,7 +2,7 @@ import { FilterMatchMode } from "primereact/api";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import { InputText } from "primereact/inputtext";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useIntl } from "react-intl";
 import { BudgetService } from "../service/BudgetServices";
 import { useLoginStore } from "../store/useLoginStore";
@@ -20,6 +20,10 @@ export default function Budgets() {
   const location = useLocation();
   const [visible, setVisible] = useState<boolean>(false);
   const [selectedData, setSelectedData] = useState<any>();
+  const inputTextRef = useRef(null);
+  const handleInputTextClick = (e:any) => {
+    e.stopPropagation(); // InputText'e tıklandığında Dialog'in kapanmasını engelle
+  };
   let budgetService = new BudgetService();
 
   useEffect(() => {
@@ -39,16 +43,17 @@ export default function Budgets() {
   };
 
   const handleEditPopUp = async (id: string) => {
+    
+    
     const budgetData = await budgetService.getBudgetById(id, token);
     setSelectedData(budgetData);
     setVisible(true);
   };
 
   const handleUpdateData = (data: any, token: string) => {
-    budgetService
-      .updateBudget(data, token)
-      .then(() => console.log("Başarılı"));
-      console.log(selectedData)
+
+console.log(data)
+    budgetService.updateBudget(data, token).then((result) => console.log(result));
   };
   const footerContent = (
     <div>
@@ -152,7 +157,8 @@ export default function Budgets() {
       >
         <div className="card flex justify-content-center">
           <InputText
-            value={selectedData?.budgetValue || ""}
+                      ref={inputTextRef}
+                      onClick={handleInputTextClick}
             onChange={(e) =>
               setSelectedData({ ...selectedData, budgetValue: e.target.value })
             }
