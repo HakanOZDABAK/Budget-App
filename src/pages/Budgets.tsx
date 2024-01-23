@@ -20,10 +20,7 @@ export default function Budgets() {
   const location = useLocation();
   const [visible, setVisible] = useState<boolean>(false);
   const [selectedData, setSelectedData] = useState<any>();
-  const inputTextRef = useRef(null);
-  const handleInputTextClick = (e:any) => {
-    e.stopPropagation(); // InputText'e tıklandığında Dialog'in kapanmasını engelle
-  };
+  const [inputData,setInputData] = useState<string>("");
   let budgetService = new BudgetService();
 
   useEffect(() => {
@@ -43,17 +40,16 @@ export default function Budgets() {
   };
 
   const handleEditPopUp = async (id: string) => {
-    
-    
     const budgetData = await budgetService.getBudgetById(id, token);
     setSelectedData(budgetData);
     setVisible(true);
   };
 
   const handleUpdateData = (data: any, token: string) => {
-
-console.log(data)
-    budgetService.updateBudget(data, token).then((result) => console.log(result));
+    const updatedData = {...selectedData.data,budgetValue:data}
+    budgetService
+      .updateBudget(updatedData, token)
+      .then((result) => console.log(result));
   };
   const footerContent = (
     <div>
@@ -66,7 +62,7 @@ console.log(data)
       <Button
         label="Yes"
         icon="pi pi-check"
-        onClick={() => handleUpdateData(selectedData, token)}
+        onClick={() => handleUpdateData(inputData, token)}
         autoFocus
       />
     </div>
@@ -147,24 +143,26 @@ console.log(data)
         ></Column>
       </DataTable>
       <Dialog
-        header="Header"
-        visible={visible}
-        onHide={() => setVisible(false)}
-        style={{ width: "50vw" }}
-        breakpoints={{ "960px": "75vw", "641px": "100vw" }}
-        footer={footerContent}
-        content={null}
-      >
+      header="Header"
+      modal
+      visible={visible}
+      onHide={() => null}  // Dialog kapatılmasını istiyorsanız, onHide içinde setVisible(false) çağrısı bırakılabilir
+      style={{ width: "50vw" }}
+      breakpoints={{ "960px": "75vw", "641px": "100vw" }}
+      footer={footerContent}
+      content={null}
+    >
         <div className="card flex justify-content-center">
-          <InputText
-                      ref={inputTextRef}
-                      onClick={handleInputTextClick}
-            onChange={(e) =>
-              setSelectedData({ ...selectedData, budgetValue: e.target.value })
-            }
-          />
-        </div>
-      </Dialog>
+        <label htmlFor="username" className="text-primary-50 font-semibold">
+                                Username
+                            </label>
+                            import { InputText } from 'path/to/InputText'; // Replace 'path/to/InputText' with the actual path to the InputText component
+
+                            // ...
+
+                            <InputText id="username" label="Username" className="bg-white-alpha-20 border-none p-3 text-primary-50"></InputText>
+      </div>
+    </Dialog>
     </div>
   );
 }
