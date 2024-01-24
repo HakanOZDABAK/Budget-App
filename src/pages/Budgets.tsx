@@ -32,7 +32,7 @@ export default function Budgets() {
     } else {
       setAllData(null);
     }
-  }, [token, location.pathname]);
+  }, [token]);
 
   const handleDeleteData = async (id: string) => {
     await budgetService.deleteBudget(id, token);
@@ -62,15 +62,17 @@ export default function Budgets() {
   return (
     <div className="card mt-5">
       <DataTable
-        sortField="addTime"
         value={allData}
         scrollable
         scrollHeight="600px"
+        sortField="budgetValue" 
+        sortOrder={-1}
         emptyMessage="No customers found."
       >
         <Column
           field="budgetName"
           filter
+          sortable
           frozen
           header={intl.formatMessage({
             id: "budgetName",
@@ -79,6 +81,7 @@ export default function Budgets() {
         <Column
           field="addTime"
           filter
+          sortable
           header={intl.formatMessage({
             id: "budgetAddTime",
           })}
@@ -93,6 +96,7 @@ export default function Budgets() {
         <Column
           field="budgetOften"
           filter
+          sortable
           header={intl.formatMessage({
             id: "budgetOften",
           })}
@@ -109,6 +113,7 @@ export default function Budgets() {
           }}
           field="budgetValue"
           filter
+          sortable
           header={intl.formatMessage({
             id: "budgetValue",
           })}
