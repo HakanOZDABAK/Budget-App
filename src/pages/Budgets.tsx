@@ -1,4 +1,3 @@
-import { FilterMatchMode } from "primereact/api";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import { InputText } from "primereact/inputtext";
@@ -7,18 +6,16 @@ import { useIntl } from "react-intl";
 import { BudgetService } from "../service/BudgetServices";
 import { useLoginStore } from "../store/useLoginStore";
 
-import { useLocation } from "react-router-dom";
 import { Button } from "primereact/button";
-import { useDataStore } from "../store/useDataStore";
-import { Divider } from "primereact/divider";
 import { Dialog } from "primereact/dialog";
-import { render } from "@testing-library/react";
+import { useDataStore } from "../store/useDataStore";
+import { useNavigate } from "react-router";
 
 export default function Budgets() {
   const intl = useIntl();
   const { token } = useLoginStore();
   const { allData, setAllData } = useDataStore();
-  const location = useLocation();
+  const navigate = useNavigate()
   const [visible, setVisible] = useState<boolean>(false);
   const [selectedData, setSelectedData] = useState<any>();
   const inputData = useRef<any>(null);
@@ -58,6 +55,11 @@ export default function Budgets() {
     setSelectedData(budgetData);
     setVisible(true);
   };
+  
+  const handleNavigate = ()=>{
+
+    navigate("/budgets/details")
+  }
 
   return (
     <div className="card mt-5">
@@ -65,7 +67,7 @@ export default function Budgets() {
         value={allData}
         scrollable
         scrollHeight="600px"
-        sortField="budgetValue" 
+        sortField="budgetValue"
         sortOrder={-1}
         emptyMessage="No customers found."
       >
@@ -139,6 +141,10 @@ export default function Budgets() {
           }}
         ></Column>
       </DataTable>
+      <Button
+        label={intl.formatMessage({ id: "detailButton" })}
+       onClick={()=>handleNavigate()}
+      />
 
       <Dialog
         visible={visible}

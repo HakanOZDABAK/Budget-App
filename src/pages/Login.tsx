@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { Divider } from "primereact/divider";
-import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
-import { useLoginStore } from "../store/useLoginStore";
-import { LoginService } from "../service/LoginService";
-import { useNavigate } from "react-router";
 import { Checkbox } from "primereact/checkbox";
+import { InputText } from "primereact/inputtext";
+import { useEffect, useState } from "react";
 import { useIntl } from "react-intl";
+import { useNavigate } from "react-router";
+import { LoginService } from "../service/LoginService";
+import { useLoginStore } from "../store/useLoginStore";
 
 interface ProfileData {
   email: string;
@@ -15,15 +14,12 @@ interface ProfileData {
 
 export default function Login() {
   const intl = useIntl();
-  const { login, setLogin, setToken } = useLoginStore();
+  const {setLogin, setToken } = useLoginStore();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const navigate = useNavigate();
   const [checked, setChecked] = useState<boolean>(false);
-  const [profile, setProfile] = useState<ProfileData>({
-    email: "",
-    password: "",
-  });
+
 
   const Login = async (email: string, password: string) => {
     const profileInformation = { email, password };

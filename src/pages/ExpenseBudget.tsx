@@ -1,12 +1,11 @@
+import moment from "moment";
 import { Button } from "primereact/button";
 import { Card } from "primereact/card";
 import { InputText } from "primereact/inputtext";
 import { useForm } from "react-hook-form";
 import { useIntl } from "react-intl";
-import { useLoginStore } from "../store/useLoginStore";
-import moment from "moment";
 import { BudgetService } from "../service/BudgetServices";
-import { all } from "axios";
+import { useLoginStore } from "../store/useLoginStore";
 export default function ExpenseBudget() {
   const { token } = useLoginStore();
   const today = moment().format("YYYY-MM-DD");
@@ -47,13 +46,15 @@ export default function ExpenseBudget() {
             placeholder={intl.formatMessage({
               id: "expenseBudgetInputValue",
             })}
-            {...register("budgetValue", {
-              required: true,
-              setValueAs: (value) => {
-                const numericValue = parseFloat(value);
-                return isNaN(numericValue) ? "" : `-${Math.abs(numericValue)}`;
-              },
-            })}
+            {
+              ...register("budgetValue", {
+                required: true,
+                setValueAs: (value) => {
+                  const numericValue = parseFloat(value);
+                  return isNaN(numericValue) ? "" : numericValue === 0 ? "0" : `-${Math.abs(numericValue)}`;
+                },
+              })
+            }
           />
           <div className="mt-3 flex flex-wrap gap-3">
             <label className="ml-2">

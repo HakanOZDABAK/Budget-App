@@ -8,6 +8,7 @@ import { useThemeStore } from "../store/useThemeStore";
 import { useLoginStore } from "../store/useLoginStore";
 import Login from "../pages/Login";
 import AddBudget from "../pages/AddBudget";
+import Details from "../pages/Details"
 
 export default function Dashboard() {
   const privateRoutes = [
@@ -16,6 +17,7 @@ export default function Dashboard() {
     { path: '/addBudget', element: AddBudget },
     { path: '/expenseBudget', element: ExpenseBudget },
     { path: '/budgetsDetail', element: Budgets },
+    { path: '/budgets/details',element: Details}
   ];
   const { themeStatus, setThemeStatus } = useThemeStore((state) => state);
   const isLoggedIn = useLoginStore((state) => state.login);

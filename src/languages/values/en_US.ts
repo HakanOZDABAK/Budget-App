@@ -33,6 +33,7 @@ const en:LangType={
     password: "Password",
     rememberMe: "Remember Me",
     deleteAndUpdate: "Delete/Update",
-    login: "Login"
+    login: "Login",
+    detailButton: "Details"
 }
 export default en;

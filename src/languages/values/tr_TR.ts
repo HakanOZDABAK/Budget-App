@@ -33,6 +33,7 @@ const tr: LangType ={
     password: "Şifre",
     rememberMe: "Beni Hatırla",
     deleteAndUpdate: "Sil/Düzenle",
-    login: "Giriş Yap"
+    login: "Giriş Yap",
+    detailButton: "Detaylar"
 }
 export default tr;

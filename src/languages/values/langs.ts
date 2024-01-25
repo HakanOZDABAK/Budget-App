@@ -33,5 +33,6 @@ export type LangType = {
  rememberMe:string;
  deleteAndUpdate: string;
  login: string;
+ detailButton:string
 
 }
